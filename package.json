@@ -1,0 +1,13 @@
+{
+    "name": "miapp-trivy",
+    "version": "1.0.0",
+    "description": "Aplicación Node.js para ejemplo con Trivy",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2"
+    }
+  }
+  

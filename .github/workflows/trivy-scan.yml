@@ -1,0 +1,27 @@
+name: Trivy Security Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Instalar Trivy
+        run: |
+          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.50.0_Linux-64bit.deb
+          sudo dpkg -i trivy_0.50.0_Linux-64bit.deb
+
+      - name: Construir imagen Docker
+        run: |
+          docker build -t miapp:latest .
+
+      - name: Ejecutar Trivy
+        run: |
+          trivy image --exit-code 1 --severity CRITICAL,HIGH miapp:latest
